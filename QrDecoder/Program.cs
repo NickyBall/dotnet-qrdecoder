@@ -16,13 +16,13 @@ else
 }
 
 // Example 2: Decode from JSON response
-// string jsonResponse = @"{
-//                 ""success"": 200,
-//                 ""data"": {
-//                     ""platform_order_id"": ""THBP20251106151333LpD3WxRr"",
-//                     ""qrbase64"": ""iVBORw0KGgoAAAANSUhEUgAAA...""
-//                 }
-//             }";
+string jsonResponse = @"{
+                ""success"": 200,
+                ""data"": {
+                    ""platform_order_id"": ""THBP20251106151333LpD3WxRr"",
+                    ""qrbase64"": ""iVBORw0KGgoAAAANSUhEUgAAA...""
+                }
+            }";
 
-// string qrStringFromJson = QrDecoder.QrDecoder.DecodeFromJsonResponse(jsonResponse);
-// Console.WriteLine($"Decoded from JSON: {qrStringFromJson}");
+string qrStringFromJson = QrDecoder.QrDecoder.DecodeFromJsonResponse(jsonResponse);
+Console.WriteLine($"Decoded from JSON: {qrStringFromJson}");

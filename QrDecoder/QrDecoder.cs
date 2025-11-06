@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using Newtonsoft.Json.Linq;
 using SkiaSharp;
 using ZXing;
 using ZXing.Common;
@@ -107,6 +108,31 @@ public class QrDecoder
         {
             Console.WriteLine($"Error decoding QR code: {ex.Message}");
             Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Example usage with JSON parsing
+    /// </summary>
+    public static string DecodeFromJsonResponse(string jsonResponse)
+    {
+        try
+        {
+            // Parse JSON (using Newtonsoft.Json or System.Text.Json)
+            var json = JObject.Parse(jsonResponse);
+            string qrBase64 = json["data"]?["qrbase64"]?.ToString();
+
+            if (string.IsNullOrEmpty(qrBase64))
+            {
+                throw new Exception("qrbase64 field not found in JSON");
+            }
+
+            return DecodeQRFromBase64(qrBase64);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error parsing JSON: {ex.Message}");
             return null;
         }
     }
